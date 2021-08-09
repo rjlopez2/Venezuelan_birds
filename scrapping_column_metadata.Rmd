@@ -1,0 +1,24 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+pacman::p_load(tidyverse,rvest)
+```
+
+```{r}
+xenocantoAPI_info_site <- "https://www.xeno-canto.org/explore/api"
+```
+
+```{r}
+getwd()
+xenocantoAPI_info_site %>% 
+rvest::read_html() %>% 
+  rvest::html_nodes(css = "ul:nth-child(24) li") %>% 
+  rvest::html_text2() %>% 
+  str_split(pattern = ": ", n = 2, simplify = T) %>% 
+  as_tibble(.name_repair = ~ c("var_name", "description"), ) %>% 
+  write_csv(file ="~/p_experimental/Venezuelan_birds/metadata/column_names_info.csv")
+```
+

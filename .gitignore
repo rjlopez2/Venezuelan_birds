@@ -4,4 +4,6 @@
 .Rproj.user/
 .Rproj.user/**
 .Rhistory
+data/
+data/**
 ~$*
